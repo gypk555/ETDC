@@ -1,0 +1,35 @@
+.App {
+  text-align: center;
+}
+
+h4, h6, p{
+  width: 150px;
+}
+
+.Expiring_items{
+  text-align: center;
+}
+
+.itemsList{
+  display:  flex;
+  flex-direction: column;
+  justify-content:space-evenly;
+  align-items: center;
+  border-color: none;
+}
+
+.items-Display-headings{
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items:center;
+}
+
+.items-Display{
+  /* border-color: none; */
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
