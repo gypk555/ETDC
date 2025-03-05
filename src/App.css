@@ -2,9 +2,6 @@
   text-align: center;
 }
 
-h4, h6, p{
-  width: 150px;
-}
 
 .Expiring_items{
   text-align: center;
@@ -24,6 +21,16 @@ h4, h6, p{
   flex-direction: row;
   justify-content: space-evenly;
   align-items:center;
+}
+
+h6, p{
+  width: 200px;
+  padding-right: 100px;
+}
+
+.items-Display-headings>h4{
+  width: 200px;
+  padding-left: 20px;
 }
 
 .items-Display{

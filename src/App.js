@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { format, parseISO, differenceInDays, isBefore } from "date-fns";
+import { parse, differenceInDays, isBefore } from "date-fns";
 import './App.css';
 import items from './items';
 
@@ -9,17 +9,19 @@ function App() {
 
   useEffect(() => {
     const today = new Date();
-
     // Filter items whose due date has already passed
     const expired = items.filter((item) =>
-      isBefore(parseISO(item.Calibration_Due_date), today)
+      isBefore(parse(item.Calibration_Due_date, "dd-MM-yyyy", today), today)
     );
 
     // Filter items expiring within the next 7 days
     const expiringSoon = items.filter((item) => {
-      const expiryDate = parseISO(item.Calibration_Due_date);
+      const expiryDate = parse(item.Calibration_Due_date, "dd-MM-yyyy", today);
       const daysLeft = differenceInDays(expiryDate, today);
-      return daysLeft > 0 && daysLeft <= 7;
+      // if(daysLeft>=0 && daysLeft<=7){
+      //   console.log("exp soon items ", daysLeft, " item no ", item.id);
+      // }
+      return daysLeft >= 0 && daysLeft <= 7;
     });
 
     setExpiredItems(expired);
@@ -28,7 +30,7 @@ function App() {
     // Generate a single alert message for all expiring soon items
     if (expiringSoon.length > 0) {
       const alertMessage = expiringSoon.map((item) => (
-        `⚠️ ${item.Details_of_the_Standard} - Due on: ${format(parseISO(item.Calibration_Due_date), "dd-MM-yyyy")}`
+        `⚠️ ${item.Details_of_the_Standard} - Due on: ${item.Calibration_Due_date}`
       )).join("\n");
 
       alert(`⚠️ Items expiring soon:\n\n${alertMessage}`);
@@ -44,7 +46,8 @@ function App() {
       {expiredItems.length > 0 ? <div>
       <h4>⚠️ Expired Items</h4>
       <div className="items-Display-headings">
-          <h4>S.No</h4>
+          {/* <h4>S.No</h4> */}
+          <h4>Eqp id</h4>
           <h4>Details of the Standard</h4>  
           <h4>Model and Make</h4>  
           <h4>Details Of the Traceability</h4>  
@@ -79,7 +82,8 @@ function App() {
       {expiringSoonItems.length > 0 ? <div>
       <h4 className="Expiring_items">⚠️ Items Expiring in 7 Days</h4>
       <div className="items-Display-headings">
-          <h4>S.No</h4>
+          {/* <h4>S.No</h4> */}
+          <h4>Eqp id</h4>
           <h4>Details of the Standard</h4>  
           <h4>Model and Make</h4>  
           <h4>Details Of the Traceability</h4>  
@@ -110,7 +114,8 @@ function App() {
       {/* All Items */}
       <h4>All Items</h4>
       <div className="items-Display-headings">
-          <h4>S.No</h4>
+          {/* <h4>S.No</h4> */}
+          <h4>Eqp id</h4>
           <h4>Details of the Standard</h4>  
           <h4>Model and Make</h4>  
           <h4>Details Of the Traceability</h4>  
